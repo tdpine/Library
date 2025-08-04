@@ -24,7 +24,6 @@ function addBookToLibrary(title, author, pages, flagRead, id) {
 
 function displayBook(myLibrary){
     for (let book of myLibrary){
-        console.log(book);
         //book card creation
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("bookContainer");
@@ -42,5 +41,10 @@ function displayBook(myLibrary){
 }
 addBookToLibrary("1984", "George Orwell", 328, true, crypto.randomUUID());
 addBookToLibrary("Il nome della rosa", "Umberto Eco", 512, false, crypto.randomUUID());
+addBookToLibrary("Il Signore degli Anelli", "J.R.R. Tolkien", 1216, true, crypto.randomUUID());
+addBookToLibrary("Il Signore degli Anelli", "J.R.R. Tolkien", 1216, true, crypto.randomUUID());
+addBookToLibrary("1984", "George Orwell", 328, true, crypto.randomUUID());
+addBookToLibrary("Il nome della rosa", "Umberto Eco", 512, false, crypto.randomUUID());
+addBookToLibrary("Il Signore degli Anelli", "J.R.R. Tolkien", 1216, true, crypto.randomUUID());
 addBookToLibrary("Il Signore degli Anelli", "J.R.R. Tolkien", 1216, true, crypto.randomUUID());
 displayBook(myLibrary);

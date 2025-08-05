@@ -33,7 +33,7 @@ function displayBook(myLibrary){
         bookContainer.appendChild(bookTitle);
         //book author
         const bookInfo = document.createElement("p");
-        bookInfo.innerText = `${book.author}\n${book.pages}`;
+        bookInfo.innerText = `Author: ${book.author}\n Pages:${book.pages}`;
         bookContainer.appendChild(bookInfo);
 
         booksContainer.appendChild(bookContainer);         

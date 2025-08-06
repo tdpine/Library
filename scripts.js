@@ -1,6 +1,13 @@
 let myLibrary = [];
 let body = document.getElementsByTagName("body");
 let booksContainer = document.getElementsByClassName("booksContainer")[0];
+const showButton = document.getElementById("newBookBtn");
+const bookDialog = document.getElementById("bookDialog");
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+const readStatus = document.getElementById("readStatus");
+const confirmBtn = bookDialog.querySelector("#confirmBtn");
 function Book(title, author, pages, flagRead, id){
     this.title = title;
     this.author = author;
@@ -24,7 +31,11 @@ function addBookToLibrary(title, author, pages, flagRead, id) {
 
 function displayBook(myLibrary){
     for (let book of myLibrary){
-        //book card creation
+        createBookCard(book);   
+    }
+}
+function createBookCard(book){
+    //book card creation
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("bookContainer");
         //book title
@@ -35,10 +46,29 @@ function displayBook(myLibrary){
         const bookInfo = document.createElement("p");
         bookInfo.innerText = `Author: ${book.author}\n Pages:${book.pages}`;
         bookContainer.appendChild(bookInfo);
-
-        booksContainer.appendChild(bookContainer);         
-    }
+        // delete book from library
+        const deleteBookBtn = document.createElement("button");
+        deleteBookBtn.classList.add("deleteBook");
+        deleteBookBtn.textContent = "Delete book";
+        bookContainer.appendChild(deleteBookBtn);
+        booksContainer.appendChild(bookContainer);      
 }
+showButton.addEventListener("click", () => {
+  bookDialog.showModal();
+});
+
+bookDialog.addEventListener("close", (e) => {
+  
+});
+confirmBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  addBookToLibrary(title.value, author.value, pages.value, readStatus.checked, crypto.randomUUID());
+  createBookCard(myLibrary.pop());
+  bookDialog.close();
+});
+deleteBookBtn.addEventListener("click", (event) => {
+ 
+});
 addBookToLibrary("1984", "George Orwell", 328, true, crypto.randomUUID());
 addBookToLibrary("Il nome della rosa", "Umberto Eco", 512, false, crypto.randomUUID());
 addBookToLibrary("Il Signore degli Anelli", "J.R.R. Tolkien", 1216, true, crypto.randomUUID());

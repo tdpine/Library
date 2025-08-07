@@ -1,3 +1,4 @@
+
 let myLibrary = [];
 let body = document.getElementsByTagName("body");
 let booksContainer = document.getElementsByClassName("booksContainer")[0];
@@ -47,12 +48,30 @@ function createBookCard(book){
         const bookInfo = document.createElement("p");
         bookInfo.innerText = `Author: ${book.author}\n Pages:${book.pages}`;
         bookContainer.appendChild(bookInfo);
-        // delete book from library
+        //read status
+        const flagRead = document.createElement("input");
+        flagRead.type = "checkbox";
+        flagRead.id = "readStatusFlag";
+        flagRead.setAttribute("data-id", book.id); 
+        flagRead.disabled = true;
+        flagRead.checked = book.flagRead;
+        bookContainer.appendChild(flagRead);
+        const readStatLabel = document.createElement("label");
+        readStatLabel.htmlFor = "readStatusFlag";
+        readStatLabel.textContent = "Read status";
+        bookContainer.appendChild(readStatLabel);
+        //delete book from library
         const deleteBookBtn = document.createElement("button");
         deleteBookBtn.classList.add("deleteBook");
         deleteBookBtn.textContent = "Delete book";
         deleteBookBtn.setAttribute("data-id", book.id);
         bookContainer.appendChild(deleteBookBtn);
+        //handle read status toggle
+        const togReadStat = document.createElement("button");
+        togReadStat = classList.add("togReadStat")
+        togReadStat.textContent = "Change read status";
+        bookContainer.appendChild(togReadStat);
+
         booksContainer.appendChild(bookContainer);      
 }
 showButton.addEventListener("click", () => {
@@ -73,10 +92,17 @@ confirmBtn.addEventListener("click", (event) => {
   bookDialog.close();
 });
 booksContainer.addEventListener("click", (event) => {
- const delBtn = event.target;
- const bookParent = delBtn.parentElement;
- myLibrary = myLibrary.filter(book => book.id != bookParent.getAttribute("data-id"));
- bookParent.remove();
+ const eventTarget = event.target;
+ if(eventTarget.tagName == "BUTTON" && eventTarget.classList.contains("deleteBook")){
+     const delBtn = event.target;
+     const bookParent = delBtn.parentElement;
+     myLibrary = myLibrary.filter(book => book.id != bookParent.getAttribute("data-id"));
+     bookParent.remove();
+ }
+ else if (eventTarget.tagName == "BUTTON" && eventTarget.classList.contains("togReadStat")){
+
+ }
+
 });
 addBookToLibrary("1984", "George Orwell", 328, true, crypto.randomUUID());
 addBookToLibrary("Il nome della rosa", "Umberto Eco", 512, false, crypto.randomUUID());

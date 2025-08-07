@@ -38,6 +38,7 @@ function createBookCard(book){
     //book card creation
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("bookContainer");
+        bookContainer.setAttribute("data-id", book.id);
         //book title
         const bookTitle = document.createElement("h3");
         bookTitle.innerText = `${book.title}`;
@@ -50,6 +51,7 @@ function createBookCard(book){
         const deleteBookBtn = document.createElement("button");
         deleteBookBtn.classList.add("deleteBook");
         deleteBookBtn.textContent = "Delete book";
+        deleteBookBtn.setAttribute("data-id", book.id);
         bookContainer.appendChild(deleteBookBtn);
         booksContainer.appendChild(bookContainer);      
 }
@@ -58,16 +60,23 @@ showButton.addEventListener("click", () => {
 });
 
 bookDialog.addEventListener("close", (e) => {
-  
+    title.value = "";
+    author.value = ""; 
+    pages.value = "";  
+    readStatus.checked = false; 
 });
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
   addBookToLibrary(title.value, author.value, pages.value, readStatus.checked, crypto.randomUUID());
-  createBookCard(myLibrary.pop());
+  createBookCard(myLibrary[myLibrary.length - 1]);
+   
   bookDialog.close();
 });
-deleteBookBtn.addEventListener("click", (event) => {
- 
+booksContainer.addEventListener("click", (event) => {
+ const delBtn = event.target;
+ const bookParent = delBtn.parentElement;
+ myLibrary = myLibrary.filter(book => book.id != bookParent.getAttribute("data-id"));
+ bookParent.remove();
 });
 addBookToLibrary("1984", "George Orwell", 328, true, crypto.randomUUID());
 addBookToLibrary("Il nome della rosa", "Umberto Eco", 512, false, crypto.randomUUID());

@@ -32,4 +32,21 @@ div > h3 {
 .deleteBook{
     justify-self: center;
     margin-top: 15px;
+    height: 30px;
+    width: 80px;
+}
+#newBookBtn{
+    margin: 2rem;
+    border-radius: 4px;
+    height: 3rem;
+    width: 5rem;
+    background-color: white;
+    color: black;
+    border: 2px solid #04AA6D;
+}
+.togReadStatBtn{
+    justify-self: center;
+    margin-top: 15px;
+    height: auto;
+    width: 80px;
 }

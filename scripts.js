@@ -54,12 +54,18 @@ function createBookCard(book){
         flagRead.id = "readStatusFlag";
         flagRead.setAttribute("data-id", book.id); 
         flagRead.disabled = true;
+        flagRead.classList.add("togReadStat");
         flagRead.checked = book.flagRead;
         bookContainer.appendChild(flagRead);
         const readStatLabel = document.createElement("label");
         readStatLabel.htmlFor = "readStatusFlag";
         readStatLabel.textContent = "Read status";
-        bookContainer.appendChild(readStatLabel);
+
+        const divReadStat = document.createElement("div");
+        divReadStat.style.display= "grid";
+        divReadStat.appendChild(readStatLabel);
+        divReadStat.appendChild(flagRead);
+        bookContainer.appendChild(divReadStat);
         //delete book from library
         const deleteBookBtn = document.createElement("button");
         deleteBookBtn.classList.add("deleteBook");
@@ -68,7 +74,8 @@ function createBookCard(book){
         bookContainer.appendChild(deleteBookBtn);
         //handle read status toggle
         const togReadStat = document.createElement("button");
-        togReadStat = classList.add("togReadStat")
+        togReadStat.classList.add("togReadStatBtn");
+        togReadStat.setAttribute("data-id", book.id);
         togReadStat.textContent = "Change read status";
         bookContainer.appendChild(togReadStat);
 
@@ -99,8 +106,13 @@ booksContainer.addEventListener("click", (event) => {
      myLibrary = myLibrary.filter(book => book.id != bookParent.getAttribute("data-id"));
      bookParent.remove();
  }
- else if (eventTarget.tagName == "BUTTON" && eventTarget.classList.contains("togReadStat")){
-
+ else if (eventTarget.tagName == "BUTTON" && eventTarget.classList.contains("togReadStatBtn")){
+    const toggleStatBtn = event.target;
+    const bookId = toggleStatBtn.getAttribute("data-id");
+    const bookIndex = myLibrary.findIndex((book) => book.id == bookId);
+    myLibrary[bookIndex].flagRead = !myLibrary[bookIndex].flagRead;
+    const chkToggle = document.querySelector(`input[type="checkbox"].togReadStat[data-id="${bookId}"]`);
+    chkToggle.checked = myLibrary[bookIndex].flagRead;
  }
 
 });

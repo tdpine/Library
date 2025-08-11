@@ -8,6 +8,22 @@
     grid-auto-rows: auto;
     gap: 50px;
 }
+dialog::backdrop{
+    backdrop-filter: blur(15px);
+    
+}
+dialog{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+   
+}
 .bookContainer{
     border-radius: 5px;
     background-color: rgb(193, 183, 183);
@@ -28,6 +44,11 @@ div > h3 {
 }
 .bookContainer p{
     padding-left: 5px;  
+}
+form input[type="checkbox"]{
+     width: 15px;
+     height: 15px;
+     align-self:center;
 }
 .deleteBook{
     justify-self: center;

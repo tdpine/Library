@@ -9,13 +9,17 @@ const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const readStatus = document.getElementById("readStatus");
 const confirmBtn = bookDialog.querySelector("#confirmBtn");
-function Book(title, author, pages, flagRead, id){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.flagRead = flagRead;
-    this.id = id;
-    this.info = function(){
+
+
+class Book {
+    constructor(title, author, pages, flagRead, id) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.flagRead = flagRead;
+        this.id = id;
+    }
+    info() {
         if(this.flagRead === null || this.flagRead === false ){
            return(`${this.title} by ${this.author}, ${this.pages}, not read yet.`)
         }
@@ -23,6 +27,8 @@ function Book(title, author, pages, flagRead, id){
             return(`${this.title} by ${this.author}, ${this.pages}, already read.`)
         }
     }
+    
+
 }
 
 function addBookToLibrary(title, author, pages, flagRead, id) {
